@@ -1,0 +1,213 @@
+@font-face {
+    font-family: 'Roashe Personal Use Only';
+    src: url('../fonts/Idealist\ Models.otf') format('truetype');
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg1-color: #EBEBEB;
+    --bg2-color: #C7C2BC;
+    --bg3-color: #7C806F;
+
+    --black-color: #1B1B1B;
+    --white-color: #EBEBEB;
+
+    --main-title-font: 'Dolce Gargia', sans-serif;
+    --sub-heading-font: 'Roashe Personal Use Only', sans-serif;
+    --small-heading-font: 'Gilzen', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--black-color);
+    text-decoration: none;
+    list-style: none;
+}
+
+html, body {
+    height: 100%;
+    background: var(--bg1-color);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+.login-container {
+    padding: 5rem 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    animation: fadeIn 0.8s ease-in-out;
+    font-family: "Poppins", sans-serif;
+    background-image: url('../img/login-bg.png');
+
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-container img {
+    display: block;
+    margin: 0 auto 15px;
+    max-width: 100px;
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--black-color);
+}
+.brand-logo {
+    font-family: var(--main-title-font);
+    letter-spacing: 5px;
+}
+
+.error-message {
+    background: #ffcccc;
+    color: #900;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+}
+.login-title{
+    letter-spacing: 10px;
+    font-family: var(--small-heading-font);
+    font-size: 3em;    
+}
+
+input[type="text"],
+input[type="email"], 
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.checkbox-group {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background: var(--black-color);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition-duration: .8s;
+}
+
+input[type="submit"]:hover {
+    background: #979ea5;
+    transition-duration: 0.5s;
+    border: 1px solid var(--black-color);
+    color: var(--black-color);
+}
+
+.login-container p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-container a {
+    color: #0984e3;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+.social-login {
+    margin-top: 20px;
+}
+
+.social-btn {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.google-btn { background: #db4437; }
+.facebook-btn { background: #3b5998; }
+.social-btn:hover { opacity: 0.9; }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1024px) {
+    .login-container {
+        width: 70%;
+        padding: 4rem 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        width: 85%;
+        padding: 3rem 25px;
+    }
+    .login-container h1 {
+        font-size: 1.8rem;
+    }
+    input[type="submit"] {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+    .login-container {
+        width: 95%;
+        padding: 2rem 20px;
+    }
+    .login-container h1 {
+        font-size: 1.5rem;
+    }
+    input[type="text"],
+    input[type="password"] {
+        font-size: 13px;
+        padding: 8px;
+    }
+    input[type="submit"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+    .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}

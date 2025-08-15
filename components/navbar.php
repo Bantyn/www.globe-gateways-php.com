@@ -11,20 +11,28 @@
         <ul class="nav-left">
             <?php
             session_start();
+            
             // $_SESSION['signup']="signup";
+
+
             if (isset($_SESSION['signup']) && $_SESSION['signup']=="signup") {
                 echo ' <li><a href="home.php"><img class="brand-logo" src="../assets/logo/gg--logo-black.png" alt=""></a></li>';
                 echo '<li><a href="profile.php">Profile</a></li>';
                 echo '<li><a name="logout" href="logout.php">Logout</a></li>';
+
+               
+
+
                 unset($_SESSION['signup']); 
             } else {
                 echo ' <li><a href="home.php"><img class="brand-logo" src="../assets/logo/gg--logo-black.png" alt=""></a></li>';
                 echo '<li><a href="page/login.php">Login</a></li>';
-                echo '<li><a href="signup.php">Sign Up</a></li>';
+                echo '<li><a href="page/signup.php">Sign Up</a></li>';
             }
             ?>
            
         </ul>
+        
     </div>
 </body>
 </html>

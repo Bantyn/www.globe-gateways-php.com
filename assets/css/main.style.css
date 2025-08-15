@@ -1,10 +1,6 @@
 @font-face {
-    font-family: main-title-font;
-    src: url(../fonts/Dolce\ Gargia.otf);
-}
-@font-face {
-    font-family: Sub-heading;
-    src: url(../fonts/braliga.otf);
+    font-family: 'Roashe Personal Use Only';
+    src: url('../fonts/Idealist\ Models.otf') format('truetype');
 }
 :root{
     --bg1-color:#EBEBEB;
@@ -15,8 +11,9 @@
     --white-color:#EBEBEB;
 
     --main-title-font: 'Dolce Gargia', sans-serif;
-    --sub-heading-font: 'Braliga', sans-serif;
-    
+    --sub-heading-font: 'Roashe Personal Use Only', sans-serif;
+    --small-heading-font: 'Gilzen', sans-serif;
+
 }
 *{
     margin: 0;
@@ -29,10 +26,12 @@
 html,body{
     height: 100%;
     background: var(--bg1-color);
-    font-family: Sub-heading;
 }
 .navbar-container {
-    padding: 1rem 2rem;
+    font-family: var(--sub-heading-font);
+    padding: 1rem 4rem;
+    background: transparent;
+    font-size: 1.5em;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -47,7 +46,7 @@ html,body{
     gap: 3rem;
 }
 .title-container {
-    font-size: 4.5rem;
+    font-size: 5rem;
     font-weight: bold;
     height: 100vh;
     width: 100%;
@@ -56,4 +55,34 @@ html,body{
     justify-content: center;
     font-family: var(--main-title-font);
     letter-spacing: 0.1em;
+    /* opacity: 0; */
+}
+.title-container span:nth-child(2n) {
+    /* background-color: #1B1B1B; */
+    animation: title-animation-part-2 2s cubic-bezier(0.87, 0, 0.13, 1);
+
+    /* transform: translateY(-20%); */
+}
+.title-container span:nth-child(2n-1) {
+    /* background-color: #1B1B1B; */
+    animation: title-animation 2s cubic-bezier(0.87, 0, 0.13, 1);
+    /* transform: translateY(20%); */
+}
+
+
+@keyframes title-animation {
+    
+    0% {
+        opacity: 0;
+        transform: translateY(-20%);
+        
+    }
+}
+@keyframes title-animation-part-2 {
+    
+    
+    0% {
+        opacity: 0;
+        transform: translateY(20%);
+    }
 }
