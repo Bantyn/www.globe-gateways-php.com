@@ -1,0 +1,59 @@
+@font-face {
+    font-family: main-title-font;
+    src: url(../fonts/Dolce\ Gargia.otf);
+}
+@font-face {
+    font-family: Sub-heading;
+    src: url(../fonts/braliga.otf);
+}
+:root{
+    --bg1-color:#EBEBEB;
+    --bg2-color:#C7C2BC;
+    --bg3-color:#7C806F;
+
+    --black-color:#1B1B1B;
+    --white-color:#EBEBEB;
+
+    --main-title-font: 'Dolce Gargia', sans-serif;
+    --sub-heading-font: 'Braliga', sans-serif;
+    
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--black-color);
+    text-decoration: none;
+    list-style: none;
+}
+html,body{
+    height: 100%;
+    background: var(--bg1-color);
+    font-family: Sub-heading;
+}
+.navbar-container {
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.brand-logo{
+    width:2em;
+    margin-right: 3em;
+}
+.nav-left{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.title-container {
+    font-size: 4.5rem;
+    font-weight: bold;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--main-title-font);
+    letter-spacing: 0.1em;
+}
