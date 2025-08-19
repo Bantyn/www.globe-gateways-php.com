@@ -14,13 +14,13 @@
         <?php
         include '../components/navbar.php';
 
-        $_SESSION['signup'] = "1signup";
         // Change State login to sign up
         ?>
     </header>
     <main>
         <?php
-        if (isset($_SESSION['signup']) && $_SESSION['signup'] == "1signup") {
+        session_start();
+        if (isset($_SESSION['signup']) && $_SESSION['username'] == "signup") {
             echo '<h1 class="title-container">Globe Gateways</h1>';
         } else {
             echo '<h1 class="title-container">

@@ -1,0 +1,78 @@
+/* Package Page style */
+.btn-add-package{
+    background-color: royalblue;
+    color: var(--white-color);
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 1rem auto;
+}
+.btn-add-package i{
+    color: var(--white-color);
+}
+.btn-add-package:hover{
+    background-color: var(--primary-dark-color);
+    background: rgb(159, 171, 207);
+}
+.packageTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+#packageBody tr td:nth-child(6),
+#packageBody tr td:nth-child(1) {
+    width: 5.7%;
+}
+#packageBody tr td:nth-child(2),
+#packageBody tr td:nth-child(5),
+#packageBody tr td:nth-child(7),
+#packageBody tr td:nth-child(4) {
+    width: 10.7%;
+}
+#packageBody tr td:nth-child(3) {
+    width: 6.7%;
+}
+
+.packageTable th, .packageTable td{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.packageTable th{
+    background-color: lightgray;
+    color: var(--black-color);
+}
+
+.btn-edit-package i,
+.btn-delete-package i{
+    color: var(--white-color);
+}
+
+.btn-edit-package{
+    background-color: royalblue;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-bottom: 0.3rem;
+}
+.btn-edit-package:hover{
+    background-color: darkblue;
+}
+.btn-delete-package{
+    background-color: crimson;
+    color: var(--white-color);
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+.btn-delete-package:hover{
+    background-color: darkred;
+}

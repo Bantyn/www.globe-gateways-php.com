@@ -8,9 +8,11 @@ if(isset($_POST['submit'])){
        $confirm_password = $_POST['confirm_password'];
 
        if(empty($name) || empty($username) || empty($email) || empty($password) || empty($confirm_password)){
+
            echo "<script>alert('Please fill in all required fields');</script>";
        } elseif ($password !== $confirm_password) {
            echo "<script>alert('Passwords do not match');</script>";
+       
        } else {
            $query = "INSERT INTO users (full_name, username, email, password) VALUES ('$name', '$username', '$email', '$password')";
            $result = mysqli_query($conn, $query);
@@ -25,7 +27,6 @@ if(isset($_POST['submit'])){
        }
        header("Location: login.php");
        exit();       
-
 }
 ?>
 
