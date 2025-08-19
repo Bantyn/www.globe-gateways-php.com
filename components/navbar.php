@@ -10,24 +10,21 @@
     <div class="navbar-container">
         <ul class="nav-left">
             <?php
-            session_start();
-            
-            // $_SESSION['signup']="signup";
 
-
-            if (isset($_SESSION['signup']) && $_SESSION['signup']=="signup") {
-                echo ' <li><a href="home.php"><img class="brand-logo" src="../assets/logo/gg--logo-black.png" alt=""></a></li>';
-                echo '<li><a href="profile.php">Profile</a></li>';
-                echo '<li><a name="logout" href="logout.php">Logout</a></li>';
-
-               
-
-
-                unset($_SESSION['signup']); 
-            } else {
+            if (isset($_SESSION['username']) && $_COOKIE['username'] == "signup") {
                 echo ' <li><a href="home.php"><img class="brand-logo" src="../assets/logo/gg--logo-black.png" alt=""></a></li>';
                 echo '<li><a href="page/login.php">Login</a></li>';
                 echo '<li><a href="page/signup.php">Sign Up</a></li>';
+            } else {
+                if(isset($_REQUEST['logout'])) {
+                    setcookie("username", "", time() - 10, "/");
+                    header("Location: page/login.php");
+                    exit();
+                }
+                echo ' <li><a href="home.php"><img class="brand-logo" src="../assets/logo/gg--logo-black.png" alt=""></a></li>';
+                echo '<li><a href="profile.php">Profile</a></li>';
+                echo '<li><a name="logout" href="?logout=true">Logout</a></li>';
+                echo '<li><a href="profile.php">Wellcome ' . $_COOKIE['username'] . '</a></li>';
             }
             ?>
            
