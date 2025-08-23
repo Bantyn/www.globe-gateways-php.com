@@ -1,9 +1,9 @@
  <div class="dashboard-container">
      <div class="dashboard-header">
          <?php
-         session_start();
+        //  session_start();
             echo "<h1>User Packages</h1>";
-            echo '<div>Wellcome ' . $_SESSION['username'] . '</div>';
+            echo '<div>Wellcome ' . $_COOKIE['admin'] . '</div>';
             ?>
 
      </div>
@@ -47,7 +47,7 @@
                              <td class="price"><b><i class="bi bi-currency-rupee"></i>${pkg.price} /-</b></td>
                              <td><b>${pkg.duration}</b></td>
                              <td>${pkg.package_type}</td>
-                             <td><img src="../../uploads/${pkg.main_image}" alt="${pkg.title}" width="100%" /></td>
+                             <td><img src="${pkg.main_image}" alt="${pkg.title}" width="100%" /></td>
                              <td>${pkg.sub_images}</td>
                              <td><a href="${pkg.video_url}">Watch</a></td>
                              <td>${pkg.created_at}</td>

@@ -19,7 +19,6 @@
     </header>
     <main>
         <?php
-        session_start();
         if (isset($_SESSION['signup']) && $_SESSION['username'] == "signup") {
             echo '<h1 class="title-container">Globe Gateways</h1>';
         } else {

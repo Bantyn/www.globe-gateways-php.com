@@ -2,13 +2,11 @@
         <div class="dashboard-header">
 
             <?php
-                session_start();
+                // session_start();
                 echo "<h1>Admin Panel</h1>";
-                echo '<div>Wellcome ' . $_SESSION['username'] . '</div>';
+                echo '<div>Wellcome ' . $_COOKIE['admin'] . '</div>';
             ?>
-
         </div>
-
         <div class="table-container">
             <table id="usersTable">
                 <thead>

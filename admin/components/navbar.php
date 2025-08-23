@@ -92,6 +92,16 @@
         background-position:180%;
     }
 }
+.logout-button,.logout-button button{
+    background-color: crimson;
+    color: var(--white-color);
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
 </style>
 <nav class="navbar-container">
     <div class="nav-menu">
@@ -105,6 +115,15 @@
             <a href="dashboard.php?payments=payments">Payments</a>
             <a href="dashboard.php?bookings=bookings">Bookings</a>
             <a href="dashboard.php?contacts=contacts">Contacts</a>
+
+            <a href="?logout=true" name="logoutAdmin" class="logout-button"><button>Log-Out-admin</button></a>
+            <?php
+            if(isset($_REQUEST['logout'])) {
+                setcookie("admin", "", time() - 10, "/");
+                header("Location:../../client/page/login.php");
+                exit();
+            }
+            ?>
         </div>
     </div>
     <div class="nav-loader">
