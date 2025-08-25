@@ -14,6 +14,7 @@
 
     <!-- Navbar -->
     <?php include("../../admin/components/navbar.php"); ?>
+    
     <!-- Title -->
     <div class="title-container">
         <span>U</span><span>s</span><span>e</span><span>r</span><span>s</span> 

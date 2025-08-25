@@ -3,7 +3,7 @@
 
             <?php
                 echo "<h1>User Payments</h1>";
-                echo '<div>Wellcome ' . $_COOKIE['username'] . '</div>';
+                echo '<div>Wellcome ' . $_COOKIE['admin'] . '</div>';
             ?>
 
         </div>

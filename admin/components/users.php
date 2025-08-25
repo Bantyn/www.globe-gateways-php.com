@@ -4,9 +4,9 @@
         <div class="dashboard-header">
 
             <?php
-                session_start();
+                // session_start();
                 echo "<h1> User Managment</h1>";
-                echo '<div>Wellcome ' . $_SESSION['username'] . '</div>';
+                echo '<div>Wellcome ' . $_COOKIE['admin'] . '</div>';
             ?>
 
         </div>

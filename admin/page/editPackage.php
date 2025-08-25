@@ -3,12 +3,17 @@ include '../../database/config.php';
 
 if (isset($_GET['id'])) {
     $package_id = $_GET['id'];
+
     $sql = "SELECT * FROM packages WHERE package_id = '$package_id'";
+    
     $result = mysqli_query($conn, $sql);
+
     $package = mysqli_fetch_assoc($result);
 }
 
+
 if (isset($_POST['update'])) {
+
     $title = $_POST['title'];
     $location = $_POST['location'];
     $price = $_POST['price'];
@@ -38,9 +43,13 @@ if (isset($_POST['update'])) {
         sub_images = '$sub_images'
         WHERE package_id = '$package_id'
     ";
+
     $result = mysqli_query($conn, $sql);
+
     if ($result) {
+        
         echo "<script>alert('Package updated successfully!');</script>";
+        
         header("Location: ../page/dashboard.php?package=package");
     } else {
         echo "Error: " . mysqli_error($conn);
