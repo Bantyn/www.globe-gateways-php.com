@@ -110,8 +110,8 @@
             <a href="dashboard.php?home=home" class="active">Home</a>
             <a href="dashboard.php?user=user">Users</a>
             <a href="dashboard.php?package=package">Packages</a>
-            <a href="dashboard.php?report=report">Reports</a>
             <a href="dashboard.php?reviews=reviews">Reviews</a>
+            <a href="dashboard.php?reports=reports">Reports</a>
             <a href="dashboard.php?payments=payments">Payments</a>
             <a href="dashboard.php?bookings=bookings">Bookings</a>
             <a href="dashboard.php?contacts=contacts">Contacts</a>

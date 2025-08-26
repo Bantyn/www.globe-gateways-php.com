@@ -13,7 +13,6 @@
     <header>
         <?php
         include '../components/navbar.php';
-
         // Change State login to sign up
         ?>
     </header>

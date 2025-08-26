@@ -2,7 +2,8 @@
         <div class="dashboard-header">
 
             <?php
-                echo "<h1>User's Report</h1>";
+                // session_start();
+                echo "<h1>User Reports</h1>";
                 echo '<div>Wellcome ' . $_COOKIE['admin'] . '</div>';
             ?>
 
@@ -27,3 +28,4 @@
             </table>
         </div>
     </div>
+

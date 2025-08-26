@@ -8,21 +8,20 @@
             ?>
         </div>
         <div class="table-container">
-            <table id="usersTable">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Full Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>User Type</th>
-                        <th>Created At</th>
-                        <th>Updated At</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="usersBody"></tbody>
-            </table>
+           <h1>Dashboard Overview</h1>
+           <div id="dashboardCards" class="dashboard-cards">
+               <div class="card">
+                   <h2>Total Users</h2>
+                   <p id="totalUsers">0</p>
+               </div>
+               <div class="card">
+                   <h2>Total Packages</h2>
+                   <p id="totalPackages">0</p>
+               </div>
+               <div class="card">
+                   <h2>Total Reviews</h2>
+                   <p id="totalReviews">0</p>
+               </div>
+           </div>
         </div>
     </div>
