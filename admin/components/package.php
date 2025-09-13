@@ -36,9 +36,13 @@
                  <script>
                      axios.get("../api/get_package.php").then(response => {
                          const packages = response.data;
+                         console.log(packages); // Log the fetched packages for debugging
                          const packageBody = document.getElementById("packageBody");
+
                          packages.forEach(pkg => {
-                             const row = document.createElement("tr");
+                         
+                            const row = document.createElement("tr");
+                         
                              row.innerHTML = `
                              <td>${pkg.package_id}</td>
                              <td><b>${pkg.title}</b></td>
@@ -47,14 +51,14 @@
                              <td class="price"><b><i class="bi bi-currency-rupee"></i>${pkg.price} /-</b></td>
                              <td><b>${pkg.duration}</b></td>
                              <td>${pkg.package_type}</td>
-                             <td><img src="${pkg.main_image}" alt="${pkg.title}" width="100%" /></td>
+                             <td><img src="../../uploads/${pkg.main_image}" alt="${pkg.title}" width="100%" /></td>
                              <td>${pkg.sub_images}</td>
                              <td><a href="${pkg.video_url}">Watch</a></td>
                              <td>${pkg.created_at}</td>
                              <td>${pkg.updated_at}</td>
                              <td>
-                             <a href="../page/editPackage.php?id=${pkg.package_id}"><button class="btn btn-edit-package"><i class="bi bi-pencil"></i></button></a>
-                             <a href="../page/deletePackage.php?id=${pkg.package_id}"><button class="btn btn-delete-package"><i class="bi bi-trash"></i></button></a>
+                             <a href="../page/editPackage.php?id=${pkg.package_id}"><button class="edit-button"><i class="bi bi-pencil"></i>Edit</button></a>
+                             <a href="../page/deletePackage.php?id=${pkg.package_id}"><button class="delete-button"><i class="bi bi-trash"></i>Delete</button></a>
                              </td>
                              `;
                              packageBody.appendChild(row);

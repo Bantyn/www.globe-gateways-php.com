@@ -28,6 +28,7 @@
 
         include "../../database/config.php";
         if (isset($_REQUEST['submit'])) {
+           
             $title = $_REQUEST['title'];
             
             $location = $_REQUEST['location'];
@@ -37,6 +38,8 @@
             $description = $_REQUEST['description'];
             $video_url = $_REQUEST['video_url'];
 
+
+
             // Handle file uploads
             $main_image = $_FILES['main_image']['name'];
             $sub_images = $_REQUEST['sub_images'];
@@ -44,6 +47,7 @@
             // Move uploaded files to the desired directory
             move_uploaded_file($_FILES['main_image']['tmp_name'], "../../../www.globe-gateways-php.com/uploads/" . $main_image);
             // Insert package details into the database
+            
             $sql = "INSERT INTO packages (title, description, location, price, duration, package_type, main_image, sub_images, video_url) VALUES (
             '$title',
             '$description',
@@ -55,7 +59,9 @@
             '$sub_images',
             '$video_url'
         )";
+
             $result = mysqli_query($conn, $sql);
+            
             if ($result) {
                 echo "<script>alert('Package created successfully!');</script>";
                 header("Location: ../page/dashboard.php?package=package");

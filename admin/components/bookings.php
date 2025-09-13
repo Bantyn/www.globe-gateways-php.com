@@ -39,8 +39,8 @@
                                     <td>${booking.total_price}</td>
                                     <td>${booking.status}</td>
                                     <td>
-                                        <button class="edit-button" data-id="${booking.booking_id}">Edit</button>
-                                        <button class="delete-button" data-id="${booking.booking_id}">Delete</button>
+                                        <button class="edit-button" data-id="${booking.booking_id}"><i class="bi bi-check"></i>Done</button>
+                                        <button class="delete-button" data-id="${booking.booking_id}"><i class="bi bi-x"></i>Cancel</button>
                                     </td>
                                 `;
                                 bookingsBody.appendChild(row);

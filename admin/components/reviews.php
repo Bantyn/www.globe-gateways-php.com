@@ -71,8 +71,8 @@
                                 <td>${review.comment}</td>
                                 <td>${review.created_at}</td>
                                 <td>
-                                    <button class="btn-edit-reviews" data-id="${review.review_id}"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn-delete-reviews" data-id="${review.review_id}"><i class="bi bi-trash"></i></button>
+                                    <button class="edit-button" data-id="${review.review_id}"><i class="bi bi-pencil"></i>Edit</button>
+                                    <button class="delete-button" data-id="${review.review_id}"><i class="bi bi-trash"></i>Delete   </button>
                                 </td>
                             `;
                             document.getElementById("reviewsBody").appendChild(row);

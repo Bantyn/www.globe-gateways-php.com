@@ -1,6 +1,6 @@
 <style>
     .navbar-container {
-    font-family: var(--sub-heading-font);
+    font-family: var(--main-font);
     padding: 1rem 4rem;
     background: var(--white-color);
     display: flex;
@@ -111,7 +111,6 @@
             <a href="dashboard.php?user=user">Users</a>
             <a href="dashboard.php?package=package">Packages</a>
             <a href="dashboard.php?reviews=reviews">Reviews</a>
-            <a href="dashboard.php?reports=reports">Reports</a>
             <a href="dashboard.php?payments=payments">Payments</a>
             <a href="dashboard.php?bookings=bookings">Bookings</a>
             <a href="dashboard.php?contacts=contacts">Contacts</a>

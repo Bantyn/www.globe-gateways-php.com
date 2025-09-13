@@ -2,20 +2,46 @@
     font-family: 'Roashe Personal Use Only';
     src: url('../fonts/Idealist\ Models.otf') format('truetype');
 }
-:root{
-    --bg1-color:#EBEBEB;
-    --bg2-color:#C7C2BC;
-    --bg3-color:#7C806F;
 
-    --black-color:#1B1B1B;
-    --white-color:#EBEBEB;
+@font-face {
+    font-family: 'sheryFont';
+    src: url('../fonts/main/AvertaCY-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'sheryFont2';
+    src: url('../fonts/main/AvertaCY-Light.ttf');
+}
+
+@font-face {
+    font-family: 'sheryFont3';
+    src: url('../fonts/main/AvertaCY-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'sheryFont4';
+    src: url('../fonts/main/AvertaCY-Semibold.ttf');
+}
+
+:root {
+    --bg1-color: #EBEBEB;
+    --bg2-color: #C7C2BC;
+    --bg3-color: #7C806F;
+
+    --black-color: #1B1B1B;
+    --white-color: #EBEBEB;
 
     --main-title-font: 'Dolce Gargia', sans-serif;
     --sub-heading-font: 'Roashe Personal Use Only', sans-serif;
     --small-heading-font: 'Gilzen', sans-serif;
-
+    /* From Shery Font */
+    --main-font: 'sheryFont';
+    --main-font-light: 'sheryFont2';
+    --main-font-regular: 'sheryFont3';
+    --main-font-semibold: 'sheryFont4';
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -23,69 +49,131 @@
     text-decoration: none;
     list-style: none;
 }
-html,body{
+
+html,
+body {
     height: 100%;
+    width: 99vw;
     background: var(--bg1-color);
 }
+
 .navbar-container {
-    font-family: var(--sub-heading-font);
-    padding: 1rem 4rem;
-    background: transparent;
-    font-size: 1.5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.brand-logo{
-    width:2em;
-    margin-right: 3em;
-}
-.nav-left{
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
-.title-container {
-    font-size: 5rem;
-    font-weight: bold;
-    height: 100vh;
-    width: 100%;
+    font-family: var(--main-font-light);
+    padding: 2rem 4rem;
+    color: var(--black-color);
+    font-size: 1em;
+    width: 100%; 
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--main-title-font);
+    position: absolute;
+    z-index: 1111;
+    top: 0;
+}
+
+.brand-logo {
+    width: 2em;
+    margin-right: 3em;
+}
+
+.nav-menu {
+    width: 100%;
+    gap: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-menu .right,.right button {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-family: var(--main-font-light);
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.right button{
+    border: 1px solid rgba(128, 128, 128, 0.479);
+    color: var(--black-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.right button:hover {
+    background: var(--black-color);
+    color: var(--white-color);
+}
+
+.nav-menu .left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    transition: color 0.3s;
+}
+.home-main{
+    min-height: 100vh;
+    width: 100%;
+}
+.title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    /* height: auto; */
+}
+
+.title-container h1{
+    font-size: 9rem;
+    /* font-weight: bold; */
+    color: transparent;
+    width: 100%;
+    font-family: var(--main-font);
+    -webkit-text-stroke: 1px var(--black-color);
     letter-spacing: 0.1em;
     /* opacity: 0; */
 }
-.title-container span:nth-child(2n) {
-    /* background-color: #1B1B1B; */
-    animation: title-animation-part-2 2s cubic-bezier(0.87, 0, 0.13, 1);
-
-    /* transform: translateY(-20%); */
+.title-container .globeGateways{
+    position: relative;
+    display: inline;
 }
-.title-container span:nth-child(2n-1) {
-    /* background-color: #1B1B1B; */
-    animation: title-animation 2s cubic-bezier(0.87, 0, 0.13, 1);
-    /* transform: translateY(20%); */
+.title-container .globeGateways h1{
+    transition-duration: .8s;
+
+}
+.title-container .globeGateways h1:hover {
+    color: var(--black-color);
+    transition-duration: 0.3s;
+}
+.title-container p{
+    position: absolute;
+    font-size: 1.25rem;
+    color: black;
+    width: 100%;
+    text-transform: capitalize;
+    left: 20px;
+    font-weight: 100;
+    /* background: #000; */
+    text-align: start;
+    font-family: var(--main-font-light);
+    letter-spacing: 0.1em;
 }
 
 
 
+.package-main{
 
 
-@keyframes title-animation {
-    
-    0% {
-        opacity: 0;
-        transform: translateY(-20%);
-        
-    }
 }
-@keyframes title-animation-part-2 {
-    
-    
-    0% {
-        opacity: 0;
-        transform: translateY(20%);
-    }
+
+#fimages {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    margin-top: 5vw;
 }
