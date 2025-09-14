@@ -105,7 +105,7 @@
 </style>
 <nav class="navbar-container">
     <div class="nav-menu">
-        <img src="../../assets/logo/gg--logo-black.png" alt="Logo" class="brand-logo">
+        <h2 style="display: flex; align-items:start;justify-content:center;flex-direction:column;" class="brand-logo"><span style="-webkit-text-stroke: .5px black; color:transparent;margin-right:5px;">Globe</span>Gateways</h2>
         <div class="nav-left">
             <a href="dashboard.php?home=home" class="active">Home</a>
             <a href="dashboard.php?user=user">Users</a>
