@@ -127,9 +127,9 @@
     </div>
     <div class="nav-loader">
         <div class="lineLoaderContainer" id="lineLoaderContainer">
-                    <div class="loader"></div>
-                    <div class="loader"></div>
-                    <div class="loader"></div>
+            <div class="loader"></div>
+            <div class="loader"></div>
+            <div class="loader"></div>
         </div>
     </div>
 </nav>
