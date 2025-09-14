@@ -11,7 +11,7 @@ session_start();
     <link
         href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
         rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" /> <!-- Recommended -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.css" />
 
 </head>
 
@@ -28,16 +28,16 @@ session_start();
             <div class="home-main">
                 <div class="title-container">
                     <div class="globeGateways ">
-                        <p>your one-stop solution for all your gateway needs.</p>
-                        <h1 style="display: inline;" class="hvr">Globe</h1>
-                        <h1 style="display: inline;" class="hvr">Gateways</h1>
+                        <p class="text-animate">your one-stop solution for all your gateway needs.</p>
+                        <h1 style="display: inline;" class="hvr ">Globe</h1>
+                        <h1 style="display: inline;" class="hvr ">Gateways</h1>
                     </div>
-                    <p>It is a one-stop travel platform offering easy access to explore and book exciting tour packages worldwide.</p>
+                    <p class="text-animate">It is a one-stop travel platform offering easy access to explore and book exciting tour packages worldwide.</p>
                 </div>
             </div>
             <div class="package-main">
                 <div class="fheading ">
-                    <h1 class="">exaplore</h1>
+                    <h1 class="text-animate">exaplore</h1>
                     <h1 class="">Packages</h1>
                 </div>
 
@@ -90,17 +90,18 @@ session_start();
         <?php endif; ?>
     </main>
 </body>
-<script  type="text/javascript"  src="https://unpkg.com/sheryjs/dist/Shery.js"></script> <!-- Recommended -->
+<!-- Three.js is needed for 3d Effects -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
 <!--  Gsap is needed for Basic Effects -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <!-- Scroll Trigger is needed for Scroll Effects -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-<!-- Three.js is needed for 3d Effects -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
 
 <!-- ControlKit is needed for Debug Panel -->
 <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
+<script  type="text/javascript"  src="https://unpkg.com/sheryjs/dist/Shery.js"></script>
 <script src="../assets//js/index.js"></script>
 </html>
