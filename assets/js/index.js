@@ -36,17 +36,17 @@ gsap.to(".fleftelm", {
 
 Shery.imageEffect(".images", {
   style: 5,
+  config: { onMouse: { value: 1 } },
 
   slideStyle: function(setScroll) {
     sections.forEach(function(section, index) {
       ScrollTrigger.create({
         trigger: section,
         start: "top top",
-        scrub: 1,
         onUpdate: function (prog) {
           console.log(prog.progress);
           setScroll(prog.progress, index);
-        },
+        }
       });
     });
   }

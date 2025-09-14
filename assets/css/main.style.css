@@ -281,7 +281,7 @@ body {
 }
 
 #fleft {
-    /* overflow: hidden; */
+    overflow: hidden;
     width: 45%;
     height: inherit;
     padding-left: 20px;
