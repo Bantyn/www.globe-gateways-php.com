@@ -3,12 +3,12 @@ include '../../database/config.php';
 
 header('Content-Type: application/json');
 
-$result = mysqli_query($conn, "SELECT * FROM packages");
-
-$packages = [];
+$result = mysqli_query($conn, "SELECT * FROM reviews");
+$reviews = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
-    $packages[] = $row;
+    $reviews[] = $row;
 }
-echo json_encode($packages);
+
+echo json_encode($reviews);
 mysqli_close($conn);

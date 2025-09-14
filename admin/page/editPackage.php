@@ -8,7 +8,9 @@ if (isset($_GET['id'])) {
     $package = mysqli_fetch_assoc($result);
 }
 
+
 if (isset($_POST['update'])) {
+
     $title = $_POST['title'];
     $location = $_POST['location'];
     $price = $_POST['price'];
@@ -25,6 +27,7 @@ if (isset($_POST['update'])) {
         move_uploaded_file($_FILES['main_image']['tmp_name'], "../../../www.globe-gateways-php.com/uploads/" . $main_image);
     }
 
+
     // Update package details in the database
     $sql = "UPDATE packages SET
         title = '$title',
@@ -38,7 +41,9 @@ if (isset($_POST['update'])) {
         sub_images = '$sub_images'
         WHERE package_id = '$package_id'
     ";
+
     $result = mysqli_query($conn, $sql);
+
     if ($result) {
         echo "<script>alert('Package updated successfully!');</script>";
         header("Location: ../page/dashboard.php?package=package");
@@ -124,7 +129,6 @@ if (isset($_POST['update'])) {
             <input type="url" class="form-control" name="video_url" value="<?php echo $package['video_url']; ?>">
         </div>
 
-        <!-- Buttons -->
         <div class="d-flex justify-content-between">
             <a href="javascript:history.back()" class="btn btn-secondary">
                 <i class="bi bi-arrow-left"></i> Back

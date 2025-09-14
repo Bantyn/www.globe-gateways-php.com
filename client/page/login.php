@@ -4,7 +4,7 @@ session_start();
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
+ 
     if (empty($username) || empty($password)) {
         echo "<script>alert('Please fill in all required fields');</script>";
     } else {
@@ -12,16 +12,15 @@ if (isset($_POST['submit'])) {
         $adminquery = "SELECT * FROM admin WHERE (username='$username' OR email='$username') AND password='$password'";
         $userresult = mysqli_query($conn, $userquery);
         $adminresult = mysqli_query($conn, $adminquery);
-        // $row = mysqli_fetch_assoc($userresult);
-
-        
         
         if (mysqli_num_rows($userresult) > 0) {
             $_SESSION['username'] = $username;
+            setcookie("username", $username, time() + (86400 * 30), "/");
                 header("Location: ../index.php");
             exit();
         } elseif(mysqli_num_rows($adminresult) > 0){
             $_SESSION['admin'] = $username;
+            setcookie("admin", $username, time() + (86400 * 30), "/");
             header("Location: ../../admin/page/dashboard.php?home=home&adminname=" . urlencode($username));
             exit();
         }

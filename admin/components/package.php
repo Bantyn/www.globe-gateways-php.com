@@ -1,9 +1,9 @@
  <div class="dashboard-container">
      <div class="dashboard-header">
          <?php
-         session_start();
+        //  session_start();
             echo "<h1>User Packages</h1>";
-            echo '<div>Wellcome ' . $_SESSION['username'] . '</div>';
+            echo '<div>Wellcome ' . $_COOKIE['admin'] . '</div>';
             ?>
 
      </div>
@@ -36,9 +36,13 @@
                  <script>
                      axios.get("../api/get_package.php").then(response => {
                          const packages = response.data;
+                         console.log(packages); // Log the fetched packages for debugging
                          const packageBody = document.getElementById("packageBody");
+
                          packages.forEach(pkg => {
-                             const row = document.createElement("tr");
+                         
+                            const row = document.createElement("tr");
+                         
                              row.innerHTML = `
                              <td>${pkg.package_id}</td>
                              <td><b>${pkg.title}</b></td>
@@ -53,8 +57,8 @@
                              <td>${pkg.created_at}</td>
                              <td>${pkg.updated_at}</td>
                              <td>
-                             <a href="../page/editPackage.php?id=${pkg.package_id}"><button class="btn btn-edit-package"><i class="bi bi-pencil"></i></button></a>
-                             <a href="../page/deletePackage.php?id=${pkg.package_id}"><button class="btn btn-delete-package"><i class="bi bi-trash"></i></button></a>
+                             <a href="../page/editPackage.php?id=${pkg.package_id}"><button class="edit-button"><i class="bi bi-pencil"></i>Edit</button></a>
+                             <a href="../page/deletePackage.php?id=${pkg.package_id}"><button class="delete-button"><i class="bi bi-trash"></i>Delete</button></a>
                              </td>
                              `;
                              packageBody.appendChild(row);
