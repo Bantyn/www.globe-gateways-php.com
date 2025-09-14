@@ -4,7 +4,7 @@ session_start();
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
+ 
     if (empty($username) || empty($password)) {
         echo "<script>alert('Please fill in all required fields');</script>";
     } else {
