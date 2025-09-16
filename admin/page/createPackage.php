@@ -16,7 +16,7 @@
         * {
             box-sizing: border-box;
         }
-
+  
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
