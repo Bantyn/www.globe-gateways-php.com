@@ -1,9 +1,24 @@
-@font-face {
-    font-family: 'Roashe Personal Use Only';
-    src: url('../fonts/Idealist\ Models.otf') format('truetype');
-}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+@font-face {
+    font-family: 'sheryFont';
+    src: url('../fonts/main/AvertaCY-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'sheryFont2';
+    src: url('../fonts/main/AvertaCY-Light.ttf');
+}
+
+@font-face {
+    font-family: 'sheryFont3';
+    src: url('../fonts/main/AvertaCY-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'sheryFont4';
+    src: url('../fonts/main/AvertaCY-Semibold.ttf');
+}
 :root {
     --bg1-color: #EBEBEB;
     --bg2-color: #C7C2BC;
@@ -12,10 +27,14 @@
     --black-color: #1B1B1B;
     --white-color: #EBEBEB;
 
-    --main-title-font: 'Dolce Gargia', sans-serif;
-    --sub-heading-font: 'Roashe Personal Use Only', sans-serif;
-    --small-heading-font: 'Gilzen', sans-serif;
+
+    /* From Shery Font */
+    --main-font: 'sheryFont';
+    --main-font-light: 'sheryFont2';
+    --main-font-regular: 'sheryFont3';
+    --main-font-semibold: 'sheryFont4';
 }
+
 
 * {
     margin: 0;
@@ -67,7 +86,7 @@ body {
     color: var(--black-color);
 }
 .brand-logo {
-    font-family: var(--main-title-font);
+    font-family: var(--main-font-regular);
     letter-spacing: 5px;
 }
 
@@ -87,7 +106,7 @@ label {
 }
 .login-title{
     letter-spacing: 10px;
-    font-family: var(--small-heading-font);
+    font-family: var(--main-font-semibold);
     font-size: 3em;    
 }
 
