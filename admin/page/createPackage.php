@@ -74,7 +74,7 @@
 
 
         ?>
-        <form class="container" method="POST" enctype="multipart/form-data">
+        <form class="container pb-5" method="POST" enctype="multipart/form-data">
             <div class="title-container" style="margin: 100px;">
                 <span>C</span><span>r</span><span>e</span><span>a</span><span>t</span><span>e</span><span>i</span><span>n</span><span>g</span>
                 <span>&nbsp;&nbsp;</span>
@@ -142,7 +142,7 @@
             </div>
 
             <!-- Buttons -->
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between ">
                 <a href="javascript:history.back()" class="btn btn-secondary">
                     <i class="bi bi-arrow-left"></i> Back
                 </a>
