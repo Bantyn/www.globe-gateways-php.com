@@ -41,7 +41,6 @@
     transform: scale(1.05);
 }
 
-/* Optional: Icon spacing if you add <i> inside buttons */
 .pending-btn i,
 .confirm-btn i,
 .cancel-btn i {
@@ -73,7 +72,6 @@
                 </tr>
             </thead>
             <tbody id="bookingsBody">
-                <!-- Rows inserted dynamically -->
             </tbody>
         </table>
     </div>
@@ -84,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const bookingsBody = document.getElementById("bookingsBody");
     if (!bookingsBody) return;
 
-    // Load bookings from API
     function loadBookings() {
         bookingsBody.innerHTML = '';
         axios.get("../api/get_bookings.php")
@@ -110,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     bookingsBody.appendChild(row);
                 });
 
-                // Event listeners for buttons
                 document.querySelectorAll(".pending-btn").forEach(btn => {
                     btn.addEventListener("click", () => updateStatus(btn.dataset.id, "Pending"));
                 });
@@ -127,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // Update booking status via API
     function updateStatus(bookingId, status) {
         axios.post("../api/update_booking_status.php", new URLSearchParams({
             booking_id: bookingId,

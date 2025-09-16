@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // 1️⃣ Update payments table
     $sql = "UPDATE payments SET status=? WHERE payment_id=?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "si", $status, $payment_id);
@@ -27,9 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // 2️⃣ Optional: update bookings table if payment is done
     if ($status === "Done") {
-        // Get booking_id linked to this payment
         $result = mysqli_query($conn, "SELECT booking_id FROM payments WHERE payment_id=$payment_id");
         $row = mysqli_fetch_assoc($result);
         if ($row) {
