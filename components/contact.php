@@ -9,26 +9,31 @@
     </p>
   </div>
   <div class="contact-form card">
-    <h2 class="form-title">Contact Us</h2>
-    <form action="mailto:example@example.com" method="post" enctype="text/plain">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
+  <h2 class="form-title">Contact Us</h2>
+  <form id="contactForm" method="POST">
+    <label for="full_name">Name:</label>
+    <input type="text" id="full_name" name="full_name" required>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
 
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required>
 
-      <button type="submit" class="btn-submit">Send</button>
-    </form>
-  </div>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit" class="btn-submit">Send</button>
+  </form>
+  <p id="formResponse" style="margin-top:10px;"></p>
+</div>
+
 
   <div class="contact-info card">
     <h3 class="info-title">Get in Touch</h3>
-    <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
-    <p>Phone: +1 (123) 456-7890</p>
-    <p>Address: 123 Main St, Anytown, USA</p>
+    <p>Email: <a href="mailto:example@example.com">patelbanty@gmail.com</a></p>
+    <p>Phone: +91 9909914197</p>
+    <p>Address: Surat</p>
 
     <div class="social-media">
       <a href="#"><i class="ri-facebook-fill"></i></a>
@@ -42,3 +47,24 @@
   </div>
   </div>
 </div>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch('api/submit_contact.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        const responseEl = document.getElementById('formResponse');
+        responseEl.textContent = data.message;
+        responseEl.style.color = data.success ? 'green' : 'red';
+        if (data.success) this.reset();
+    })
+    .catch(err => console.error(err));
+});
+</script>

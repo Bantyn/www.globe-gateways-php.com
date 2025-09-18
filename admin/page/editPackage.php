@@ -1,16 +1,26 @@
 <?php
 include '../../database/config.php';
 
+// Get package safely
+$package = null;
 if (isset($_GET['id'])) {
-    $package_id = $_GET['id'];
-    $sql = "SELECT * FROM packages WHERE package_id = '$package_id'";
-    $result = mysqli_query($conn, $sql);
-    $package = mysqli_fetch_assoc($result);
+    $package_id = intval($_GET['id']);
+    $stmt = $conn->prepare("SELECT * FROM packages WHERE package_id = ?");
+    $stmt->bind_param("i", $package_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $package = $result->fetch_assoc();
+    $stmt->close();
 }
 
+// If package not found, exit
+if (!$package) {
+    echo "<p style='text-align:center;margin-top:50px;'>❌ Package not found!</p>";
+    exit;
+}
 
+// Handle form submission
 if (isset($_POST['update'])) {
-
     $title = $_POST['title'];
     $location = $_POST['location'];
     $price = $_POST['price'];
@@ -19,41 +29,30 @@ if (isset($_POST['update'])) {
     $description = $_POST['description'];
     $video_url = $_POST['video_url'];
 
-    // Handle file uploads
-    $main_image = $_FILES['main_image']['name'] ?: $package['main_image'];
-    $sub_images = $_POST['sub_images'];
-
+    // Main image handling
+    $main_image = $package['main_image'];
     if (!empty($_FILES['main_image']['tmp_name'])) {
+        $main_image = basename($_FILES['main_image']['name']);
         move_uploaded_file($_FILES['main_image']['tmp_name'], "../../../www.globe-gateways-php.com/uploads/" . $main_image);
     }
 
+    // Sub images (comma-separated)
+    $sub_images = $_POST['sub_images'] ?: $package['sub_images'];
 
-    // Update package details in the database
-    $sql = "UPDATE packages SET
-        title = '$title',
-        location = '$location',
-        price = '$price',
-        duration = '$duration',
-        package_type = '$package_type',
-        description = '$description',
-        video_url = '$video_url',
-        main_image = '$main_image',
-        sub_images = '$sub_images'
-        WHERE package_id = '$package_id'
-    ";
+    // Update using prepared statement
+    $stmt = $conn->prepare("UPDATE packages SET title=?, location=?, price=?, duration=?, package_type=?, description=?, video_url=?, main_image=?, sub_images=? WHERE package_id=?");
+    $stmt->bind_param("ssdssssssi", $title, $location, $price, $duration, $package_type, $description, $video_url, $main_image, $sub_images, $package_id);
 
-    $result = mysqli_query($conn, $sql);
-
-    if ($result) {
-        echo "<script>alert('Package updated successfully!');</script>";
-        header("Location: ../page/dashboard.php?package=package");
+    if ($stmt->execute()) {
+        echo "<script>alert('✅ Package updated successfully!'); window.location.href='../page/dashboard.php?package=package';</script>";
+        exit;
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "<p style='color:red;'>Error updating package: " . $stmt->error . "</p>";
     }
-
-    exit();
+    $stmt->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,11 +79,11 @@ if (isset($_POST['update'])) {
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" value="<?php echo $package['title']; ?>" required>
+                <input type="text" class="form-control" name="title" value="<?php echo htmlspecialchars($package['title']); ?>" required>
             </div>
             <div class="col-md-6">
                 <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="location" value="<?php echo $package['location']; ?>" required>
+                <input type="text" class="form-control" name="location" value="<?php echo htmlspecialchars($package['location']); ?>" required>
             </div>
         </div>
 
@@ -95,7 +94,7 @@ if (isset($_POST['update'])) {
             </div>
             <div class="col-md-4">
                 <label class="form-label">Duration</label>
-                <input type="text" class="form-control" name="duration" value="<?php echo $package['duration']; ?>" required>
+                <input type="text" class="form-control" name="duration" value="<?php echo htmlspecialchars($package['duration']); ?>" required>
             </div>
             <div class="col-md-4">
                 <label class="form-label">Package Type</label>
@@ -109,7 +108,7 @@ if (isset($_POST['update'])) {
 
         <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea class="form-control" name="description" rows="4"><?php echo $package['description']; ?></textarea>
+            <textarea class="form-control" name="description" rows="4"><?php echo htmlspecialchars($package['description']); ?></textarea>
         </div>
 
         <div class="row mb-3">
@@ -120,13 +119,13 @@ if (isset($_POST['update'])) {
             </div>
             <div class="col-md-6">
                 <label class="form-label">Sub Images</label>
-                <input type="text" class="form-control" name="sub_images" value="<?php echo $package['sub_images']; ?>">
+                <input type="text" class="form-control" name="sub_images" value="<?php echo htmlspecialchars($package['sub_images']); ?>">
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Video URL</label>
-            <input type="url" class="form-control" name="video_url" value="<?php echo $package['video_url']; ?>">
+            <input type="url" class="form-control" name="video_url" value="<?php echo htmlspecialchars($package['video_url']); ?>">
         </div>
 
         <div class="d-flex justify-content-between">

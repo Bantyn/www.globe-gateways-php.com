@@ -13,12 +13,10 @@
                 <tr>
                     <td colspan="9">
                         <div class="search-container">
-                            
                             <input
                                 type="text"
                                 id="searchInput"
-                                placeholder="Search By Username">
-                            <button type="button" id="searchBtn"><i class="bi bi-search"></i></button>
+                                placeholder="🔍 Search by Username...">
                         </div>
                     </td>
                 </tr>
@@ -38,6 +36,75 @@
         </table>
     </div>
 </div>
+
+<!-- JavaScript -->
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const tbody = document.getElementById('usersBody');
+
+    // Function to load users from API
+    function loadUsers(search = '') {
+        tbody.innerHTML = '<tr><td colspan="9">Loading...</td></tr>';
+
+        axios.get(`../api/get_users.php?search=${encodeURIComponent(search)}`)
+            .then(response => {
+                const users = response.data;
+                tbody.innerHTML = '';
+                if (users.length > 0) {
+                    users.forEach(user => {
+                        tbody.innerHTML += `
+                        <tr>
+                            <td>${user.user_id}</td>
+                            <td>${user.full_name}</td>
+                            <td>${user.username}</td>
+                            <td>${user.email}</td>
+                            <td>${user.password}</td>
+                            <td>${user.user_type}</td>
+                            <td>${user.created_at}</td>
+                            <td>${user.updated_at}</td>
+                            <td>
+                                <a href="../page/edit_user.php?user_id=${user.user_id}">
+                                    <button class="edit-button"><i class="bi bi-pencil"></i>Edit</button>
+                                </a>
+                                <a href="../page/dashboard.php?user=user&user_id=${user.user_id}">
+                                    <button class="delete-button"><i class="bi bi-trash"></i>Delete</button>
+                                </a>
+                            </td>
+                        </tr>`;
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="9">No users found.</td></tr>';
+                }
+            })
+             .catch(error => {
+                             console.error("Error fetching packages:", error);
+                             loader.innerHTML = `<p class="text-danger">❌ Failed to load packages.</p>`;
+                         }).finally(() => {
+                             document.getElementById("lineLoaderContainer").style.display = "none"; // Hide loader
+                         });
+    }
+
+    // Initial load
+    loadUsers();
+
+    // Search on typing (with small delay for performance)
+    let typingTimer;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            loadUsers(searchInput.value);
+        }, 300); // wait 300ms after typing
+    });
+
+    // Search on Enter key (optional backup)
+    searchInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            loadUsers(searchInput.value);
+        }
+    });
+</script>
+
 
 <?php
 // Delete user
@@ -100,66 +167,3 @@ if (isset($_GET['user_id'])) {
     }
 </style>
 
-
-<!-- JavaScript -->
-<script>
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
-    const tbody = document.getElementById('usersBody');
-
-    // Function to load users from API
-    function loadUsers(search = '') {
-        tbody.innerHTML = '<tr><td colspan="9">Loading...</td></tr>';
-        
-        axios.get(`../api/get_users.php?search=${encodeURIComponent(search)}`)
-            .then(response => {
-                const users = response.data;
-                tbody.innerHTML = '';
-                if (users.length > 0) {
-                    users.forEach(user => {
-                        tbody.innerHTML += `
-                        <tr>
-                            <td>${user.user_id}</td>
-                            <td>${user.full_name}</td>
-                            <td>${user.username}</td>
-                            <td>${user.email}</td>
-                            <td>${user.password}</td>
-                            <td>${user.user_type}</td>
-                            <td>${user.created_at}</td>
-                            <td>${user.updated_at}</td>
-                            <td>
-                                <a href="../page/edit_user.php?user_id=${user.user_id}">
-                                    <button class="edit-button"><i class="bi bi-pencil"></i>Edit</button>
-                                </a>
-                                <a href="../page/dashboard.php?user=user&user_id=${user.user_id}">
-                                    <button class="delete-button"><i class="bi bi-trash"></i>Delete</button>
-                                </a>
-                            </td>
-                        </tr>`;
-                    });
-                } else {
-                    tbody.innerHTML = '<tr><td colspan="9">No users found.</td></tr>';
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching packages:", error);
-                loader.innerHTML = `<p class="text-danger">❌ Failed to load packages.</p>`;
-                tbody.innerHTML = '<tr><td colspan="9">Error loading users.</td></tr>';
-            }).finally(() => {
-                document.getElementById("lineLoaderContainer").style.display = "none"; // Hide loader
-            });
-    }
-
-    loadUsers();
-
-    searchBtn.addEventListener('click', () => {
-        loadUsers(searchInput.value);
-    });
-
-    searchInput.addEventListener('keypress', e => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            loadUsers(searchInput.value);
-        }
-    });
-</script>

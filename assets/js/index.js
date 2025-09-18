@@ -1,90 +1,152 @@
+document.addEventListener("DOMContentLoaded", () => {
 
+    // ---------------------------
+    // USERS CHART
+    // ---------------------------
+    const usersChartEl = document.getElementById("usersChart");
+    if (usersChartEl) {
+        axios.get("../api/get_users.php")
+            .then(res => {
+                const users = res.data;
+                const usernames = users.map(u => u.username);
+                const userCounts = users.map(u => u.user_id); // example metric
 
-document.addEventListener("DOMContentLoaded", function () {
-  gsap.registerPlugin(ScrollTrigger);
-  Shery.mouseFollower();
-  Shery.makeMagnet(".magnet");
-
-  Shery.textAnimate(".text-animate", {
-    style: 2,
-    stagger: 0.1,
-    y: 10,
-    delay: 0.1,
-    duration: 2,
-    ease: "cubic-bezier(0.23, 1, 0.320, 1)",
-    multiplier: 0.1,
-  });
-
-  Shery.hoverWithMediaCircle(".hvr", {
-    videos: [
-      "../assets/video/0.mp4",
-      "../assets/video/3.mp4",
-    ],
-  });
-  const sections = gsap.utils.toArray(".fleftelm");
-  const wrapper = document.querySelector(".left-wrap") || document.querySelector("#fimages .left-wrap") || document.querySelector("#fimages");
-  if (!sections.length || !wrapper) {
-    console.warn("Scroll setup: .fleftelm or wrapper (#fimages/.left-wrap) not found", { sectionsCount: sections.length, wrapper });
-    return;
-  }
-  const totalScroll = window.innerHeight * (sections.length - 1);
-  gsap.to(".fleftelm", {
-    yPercent: -100 * (sections.length - 1),
-    ease: "none",
-    scrollTrigger: {
-      trigger: "#fimages",
-      start: "top top",
-      end: () => `+=${totalScroll}`,
-      scrub: 1,
-      pin: true,
-      anticipatePin: 1
+                new Chart(usersChartEl.getContext("2d"), {
+                    type: "bar",
+                    data: {
+                        labels: usernames,
+                        datasets: [{
+                            label: "User Count",
+                            data: userCounts,
+                            backgroundColor: "rgba(54, 162, 235, 0.6)",
+                            borderColor: "rgba(54, 162, 235, 1)",
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: true },
+                            title: { display: true, text: "Users Overview" }
+                        }
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading users chart:", err));
     }
-  });
-  Shery.imageEffect(".images", {
-    style: 6,
-    config: { onMouse: { value: 1 } },
-    slideStyle: function (setScroll) {
-      sections.forEach(function (section, index) {
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          onUpdate: function (self) {
-            setScroll(self.progress + index);
-          }
-        });
-      });
-    },
-  });
-  window.addEventListener("resize", () => {
-    ScrollTrigger.refresh();
-  });
-});
-document.addEventListener("DOMContentLoaded", function () {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray(".home-main").forEach((section, i) => {
-    gsap.from(section.querySelectorAll("p, h1, .small-desc"), {
-      opacity: 0,
-      y: 50,
-      duration: 1.2,
-      stagger: 0.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-        scrub: 1,
-      }
-    });
-  });
-  Shery.hoverWithMediaCircle(".hvr", {
-    videos: ["../assets/video/0.mp4", "../assets/video/3.mp4"],
-  });
-});
 
-// document.querySelectorAll("a").forEach(a => {
-//   a.addEventListener("click", e => {
-//     e.preventDefault();
-//   });
-// });
+    // ---------------------------
+    // PACKAGES CHART
+    // ---------------------------
+    const packagesChartEl = document.getElementById("packagesChart");
+    if (packagesChartEl) {
+        axios.get("../api/get_package.php")
+            .then(res => {
+                const packages = res.data;
+                const titles = packages.map(p => p.title);
+                const prices = packages.map(p => p.price);
+
+                new Chart(packagesChartEl.getContext("2d"), {
+                    type: "pie",
+                    data: {
+                        labels: titles,
+                        datasets: [{
+                            label: "Package Prices",
+                            data: prices,
+                            backgroundColor: [
+                                "#FF6384",
+                                "#36A2EB",
+                                "#FFCE56",
+                                "#4BC0C0",
+                                "#9966FF"
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: { display: true, text: "Packages Price Distribution" }
+                        }
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading packages chart:", err));
+    }
+
+    // ---------------------------
+    // REVIEWS CHART
+    // ---------------------------
+    const reviewsChartEl = document.getElementById("reviewsChart");
+    if (reviewsChartEl) {
+        axios.get("../api/get_reviews.php")
+            .then(res => {
+                const reviews = res.data;
+                const ratings = reviews.map(r => r.rating);
+                const counts = {};
+                ratings.forEach(r => counts[r] = (counts[r] || 0) + 1);
+
+                new Chart(reviewsChartEl.getContext("2d"), {
+                    type: "line",
+                    data: {
+                        labels: Object.keys(counts),
+                        datasets: [{
+                            label: "Number of Reviews",
+                            data: Object.values(counts),
+                            fill: false,
+                            borderColor: "rgba(255,99,132,1)",
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { title: { display: true, text: "Reviews Ratings Trend" } }
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading reviews chart:", err));
+    }
+
+    // ---------------------------
+    // PAYMENTS CHART
+    // ---------------------------
+    const paymentsChartEl = document.getElementById("paymentsChart");
+    if (paymentsChartEl) {
+        axios.get("../api/get_payments.php")
+            .then(res => {
+                const payments = res.data;
+                const statuses = payments.map(p => p.status);
+                const statusCounts = {};
+                statuses.forEach(s => statusCounts[s] = (statusCounts[s] || 0) + 1);
+
+                new Chart(paymentsChartEl.getContext("2d"), {
+                    type: "doughnut",
+                    data: {
+                        labels: Object.keys(statusCounts),
+                        datasets: [{
+                            label: "Payments Status",
+                            data: Object.values(statusCounts),
+                            backgroundColor: ["#28a745", "#ffc107", "#dc3545"]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { title: { display: true, text: "Payments Status Overview" } }
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading payments chart:", err));
+    }
+
+    // ---------------------------
+    // GSAP Scroll Effects (Optional)
+    // ---------------------------
+    if (typeof gsap !== "undefined") {
+        gsap.from(".title-container span", {
+            y: -50,
+            opacity: 0,
+            stagger: 0.05,
+            duration: 0.6
+        });
+    }
+
+});
