@@ -1,5 +1,9 @@
 <?php
 include '../../database/config.php';
+
+$errorMessages = [];
+$success = false;
+
 if(isset($_POST['submit'])){
        $name = $_POST['fullname'];
        $username = $_POST['username'];
@@ -8,25 +12,27 @@ if(isset($_POST['submit'])){
        $confirm_password = $_POST['confirm_password'];
 
        if(empty($name) || empty($username) || empty($email) || empty($password) || empty($confirm_password)){
-
-           echo "<script>alert('Please fill in all required fields');</script>";
+           $errorMessages[] = "Please fill in all required fields";
+       } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+           $errorMessages[] = "Invalid email format";
        } elseif ($password !== $confirm_password) {
-           echo "<script>alert('Passwords do not match');</script>";
-       
+           $errorMessages[] = "Passwords do not match";
+       } elseif (strlen($password) < 6) {
+           $errorMessages[] = "Password must be at least 6 characters long";
        } else {
            $query = "INSERT INTO users (full_name, username, email, password) VALUES ('$name', '$username', '$email', '$password')";
            $result = mysqli_query($conn, $query);
               if($result){
-               echo "<script>alert('Registration successful!')</script>";
-               header("Location: login.php");
+              //  echo "<script>alert('Registration successful!')</script>";
+               header("Location: login.php?");
                exit();
               } else {
                       $error = mysqli_error($conn);
-                     echo "<script>alert($error)</script>";
+                     $errorMessages[] = $error;;
               }
        }
-       header("Location: login.php");
-       exit();       
+       // header("Location: login.php");
+       // exit();       
 }
 ?>
 
@@ -47,7 +53,13 @@ if(isset($_POST['submit'])){
     <h1 class="login-title">Sign Up</h1>
 
     <!-- Error Message -->
-    <div class="error-message">Please fill in all required fields</div>
+    <?php if (!empty($errorMessages)): ?>
+        <div class="error-message">
+            <?php foreach ($errorMessages as $msg): ?>
+                <p><?php echo htmlspecialchars($msg); ?></p> 
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
     <form method="POST" class="login-form">
 
@@ -55,19 +67,25 @@ if(isset($_POST['submit'])){
         <label for="fullname" class="form-label">Full Name</label>
         <input type="text" id="fullname" name="fullname" 
                class="form-input fullname-input" 
-               placeholder="Enter your full name" required>
+               placeholder="Enter your full name" 
+               value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>"
+               required>
 
         <!-- Username -->
         <label for="username" class="form-label">Username</label>
         <input type="text" id="username" name="username" 
                class="form-input username-input" 
-               placeholder="Choose a username" required>
+               placeholder="Choose a username" 
+               value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>"
+               required>
         
         <!-- Email -->
         <label for="email" class="form-label">Email</label>
         <input type="email" id="email" name="email" 
                class="form-input email-input" 
-               placeholder="Enter your email" required>
+               placeholder="Enter your email" 
+               value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
+               required>
         
         <!-- Password -->
         <label for="password" class="form-label">Password</label>

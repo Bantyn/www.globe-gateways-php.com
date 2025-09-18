@@ -1,5 +1,43 @@
+<?php
+$errorMessages = [];
+$successMessage = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $email = trim($_POST['email']);
+  $message = trim($_POST['message']);
+
+  // ------------------- VALIDATION -------------------
+  if (empty($name) || empty($email) || empty($message)) {
+    $errorMessages[] = "All fields are required.";
+  }
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errorMessages[] = "Invalid email format.";
+  }
+  if (strlen($message) < 10) {
+    $errorMessages[] = "Message must be at least 10 characters long.";
+  }
+
+  // ------------------- SEND EMAIL -------------------
+  if (empty($errorMessages)) {
+    $to = "example@example.com"; // your email
+    $subject = "New Contact Form Submission";
+    $body = "Name: $name\nEmail: $email\nMessage:\n$message";
+    $headers = "From: $email";
+
+    if (mail($to, $subject, $body, $headers)) {
+      $successMessage = "Message sent successfully!";
+      // clear form values
+      $name = $email = $message = '';
+    } else {
+      $errorMessages[] = "Failed to send message. Please try again later.";
+    }
+  }
+}
+?>
+
 <div class="contact-container">
-     <div class="contact-wrapper">
+  <div class="contact-wrapper">
     <div class="contact-header">
     <h1 class="contact-title">Let's Connect</h1>
     <p class="contact-subtitle">
@@ -35,16 +73,16 @@
     <p>Phone: +91 9909914197</p>
     <p>Address: Surat</p>
 
-    <div class="social-media">
-      <a href="#"><i class="ri-facebook-fill"></i></a>
-      <a href="#"><i class="ri-twitter-fill"></i></a>
-      <a href="#"><i class="ri-instagram-fill"></i></a>
-      <a href="#"><i class="ri-linkedin-fill"></i></a>
-      <a href="#"><i class="ri-youtube-fill"></i></a>
-    </div>
+      <div class="social-media">
+        <a href="#"><i class="ri-facebook-fill"></i></a>
+        <a href="#"><i class="ri-twitter-fill"></i></a>
+        <a href="#"><i class="ri-instagram-fill"></i></a>
+        <a href="#"><i class="ri-linkedin-fill"></i></a>
+        <a href="#"><i class="ri-youtube-fill"></i></a>
+      </div>
 
-    <p class="follow-text">Follow us on social media for the latest updates!</p>
-  </div>
+      <p class="follow-text">Follow us on social media for the latest updates!</p>
+    </div>
   </div>
 </div>
 
